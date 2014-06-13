@@ -19,6 +19,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/test_letter"
             android:id="@+id/textpager_text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/before_selection_font" />
     </LinearLayout>
 </LinearLayout>

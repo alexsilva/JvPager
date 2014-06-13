@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,15 +99,14 @@ public class TextPager extends LinearLayout implements
         params.gravity = Gravity.CENTER;
         mView.setLayoutParams(params);
 
-        float textFontSize = getResources().getDimension(R.dimen.before_selection_font);
-
         for (int pos = 0; pos < mText.size(); pos++){
             LinearLayout view = (LinearLayout)
                     inflater.inflate(R.layout.textpager_char, mView, false);
             view.setId(VIEWS_IDS + pos);
+
             TextView text = (TextView) view.findViewById(R.id.textpager_text);
-            text.setTextSize(textFontSize);
             text.setText(mText.get(pos));
+
             params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
             view.setLayoutParams(params);
@@ -214,14 +214,15 @@ public class TextPager extends LinearLayout implements
     private void setupPageLetter(View view) {
         Resources res = getResources();
         if (mLastTextViewSelected != null){
-            mLastTextViewSelected.setTextSize(res.getDimension(R.dimen.before_selection_font));
+            mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                                              res.getDimension(R.dimen.before_selection_font));
             mLastTextViewSelected.setTextColor(res.getColor(R.color.text_before_select));
             if (reset) mPageNumber = 1; else reset = true;
         }
         mLastTextViewSelected = (TextView) view.findViewById(R.id.textpager_text);
         mLastTextViewSelected.setTextColor(res.getColor(R.color.text_after_select));
-        mLastTextViewSelected.setTextSize(res.getDimension(R.dimen.after_selection_font));
-
+        mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                                          res.getDimension(R.dimen.after_selection_font));
         mPage = mLastTextViewSelected.getText();
 
         if (mOnPageClickListener != null)
