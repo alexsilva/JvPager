@@ -8,6 +8,8 @@
     <string name="test_letter" translatable="false">M</string>
     <string name="page_information">page</string>
     <string name="textpager_pages_title">Pages</string>
+    <string name="go_next_page">go next page</string>
+    <string name="go_previous_page">go previous page</string>
 
     <color name="text_before_select">#ffffffff</color>
     <color name="text_after_select">#ffff8200</color>

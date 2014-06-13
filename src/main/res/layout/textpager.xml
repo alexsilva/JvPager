@@ -27,7 +27,8 @@
                 android:id="@+id/textpager_btn_previous"
                 android:src="@drawable/navigation_previous_item"
                 android:layout_gravity="center"
-                android:focusableInTouchMode="false" />
+                android:focusableInTouchMode="false"
+                android:contentDescription="@string/go_previous_page" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,7 +76,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textpager_btn_next"
                 android:src="@drawable/navigation_next_item"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:contentDescription="@string/go_next_page" />
 
         </LinearLayout>
     </LinearLayout>
