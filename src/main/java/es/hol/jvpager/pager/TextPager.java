@@ -67,11 +67,11 @@ public class TextPager extends LinearLayout implements View.OnClickListener, Ada
         mText = Arrays.asList(res.getTextArray(R.array.textpager_letters));
 
         // next button - layout settings
-        mPageNext = (LinearLayout) findViewById(R.id.textpager_next);
+        mPageNext = (LinearLayout) findViewById(R.id.go_next);
         mPageNext.setOnClickListener(this);
 
         // previous button - layout settings
-        mPagePrevious = (LinearLayout) findViewById(R.id.textpager_previous);
+        mPagePrevious = (LinearLayout) findViewById(R.id.go_previous);
         mPagePrevious.setOnClickListener(this);
 
         LinearLayout centerView = (LinearLayout) findViewById(R.id.textpager_center);
@@ -231,10 +231,10 @@ public class TextPager extends LinearLayout implements View.OnClickListener, Ada
 	@Override
 	public void onClick(View view) {
         switch (view.getId()){
-            case R.id.textpager_previous:
+            case R.id.go_previous:
                 setupPageIndex(view);
                 break;
-            case R.id.textpager_next:
+            case R.id.go_next:
                 setupPageIndex(view);
                 break;
             default:
