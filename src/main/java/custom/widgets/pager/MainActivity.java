@@ -1,4 +1,4 @@
-package es.hol.jvpager.pager;
+package custom.widgets.pager;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

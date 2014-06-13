@@ -1,4 +1,4 @@
-package es.hol.jvpager.pager;
+package custom.widgets.pager;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -21,7 +21,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TextPager extends LinearLayout implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class TextPager extends LinearLayout implements
+    View.OnClickListener,
+    AdapterView.OnItemSelectedListener {
+
     public interface OnPageClickListener {
         public void onPageClick(TextPager pager);
 	}

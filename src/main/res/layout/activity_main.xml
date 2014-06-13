@@ -6,8 +6,9 @@
     android:orientation="horizontal"
     android:background="@drawable/abc_ab_bottom_solid_light_holo">
 
-    <es.hol.jvpager.pager.TextPager
+    <custom.widgets.pager.TextPager
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>
