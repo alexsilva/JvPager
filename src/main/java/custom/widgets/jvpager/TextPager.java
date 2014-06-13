@@ -49,16 +49,17 @@ public class TextPager extends LinearLayout implements
 
 	public TextPager(Context context) {
 		super(context);
-		init(context);
+		initialize(context);
 	}
 
     public TextPager(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        initialize(context);
     }
 
-	private void init(Context context) {
+	private void initialize(Context context) {
         this.context = context;
+
         LayoutInflater inflater = (LayoutInflater)
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.textpager, this, true);
@@ -215,7 +216,7 @@ public class TextPager extends LinearLayout implements
         Resources res = getResources();
         if (mLastTextViewSelected != null){
             mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                                              res.getDimension(R.dimen.before_selection_font));
+                    res.getDimension(R.dimen.before_selection_font));
             mLastTextViewSelected.setTextColor(res.getColor(R.color.text_before_select));
             if (reset) mPageNumber = 1; else reset = true;
         }
