@@ -1,5 +1,7 @@
 <resources>
 
+    <dimen name="pages">12sp</dimen>
+
     <dimen name="before_selection_font">12sp</dimen>
     <dimen name="after_selection_font">13sp</dimen>
 

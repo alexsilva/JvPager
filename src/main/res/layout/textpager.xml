@@ -37,7 +37,8 @@
                 android:text="@string/test_letter"
                 android:id="@+id/textpager_previous_page_num"
                 android:singleLine="false"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:textSize="@dimen/pages" />
 
         </LinearLayout>
 
@@ -69,7 +70,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/test_letter"
                 android:id="@+id/textpager_next_page_num"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:textSize="@dimen/pages" />
 
             <ImageView
                 android:layout_width="wrap_content"
