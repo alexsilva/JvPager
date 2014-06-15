@@ -234,13 +234,11 @@ public class TextPager extends LinearLayout implements
 
 	@Override
 	public void onClick(View view) {
-        int i = view.getId();
-        if (i == R.id.go_previous) {
+        int viewId = view.getId();
+        if (viewId == R.id.go_previous) {
             setupPageIndex(view);
-
-        } else if (i == R.id.go_next) {
+        } else if (viewId == R.id.go_next) {
             setupPageIndex(view);
-
         } else {
             setupPageLetter(view);
         }
