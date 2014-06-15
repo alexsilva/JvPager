@@ -102,7 +102,7 @@ public class TextPager extends LinearLayout implements
 
         for (int pos = 0; pos < mText.size(); pos++){
             LinearLayout view = (LinearLayout)
-                    inflater.inflate(R.layout.textpager_char, mView, false);
+                    inflater.inflate(R.layout.option_page, mView, false);
             view.setId(VIEWS_IDS + pos);
 
             TextView text = (TextView) view.findViewById(R.id.textpager_text);
@@ -217,11 +217,11 @@ public class TextPager extends LinearLayout implements
         if (mLastTextViewSelected != null){
             mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     res.getDimension(R.dimen.before_selection_font));
-            mLastTextViewSelected.setTextColor(res.getColor(R.color.text_before_select));
+            mLastTextViewSelected.setTextColor(res.getColor(R.color.page_before_select));
             if (reset) mPageNumber = 1; else reset = true;
         }
         mLastTextViewSelected = (TextView) view.findViewById(R.id.textpager_text);
-        mLastTextViewSelected.setTextColor(res.getColor(R.color.text_after_select));
+        mLastTextViewSelected.setTextColor(res.getColor(R.color.page_after_select));
         mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                                           res.getDimension(R.dimen.after_selection_font));
         mPage = mLastTextViewSelected.getText();
@@ -235,9 +235,7 @@ public class TextPager extends LinearLayout implements
 	@Override
 	public void onClick(View view) {
         int viewId = view.getId();
-        if (viewId == R.id.go_previous) {
-            setupPageIndex(view);
-        } else if (viewId == R.id.go_next) {
+        if (viewId == R.id.go_previous || viewId == R.id.go_next) {
             setupPageIndex(view);
         } else {
             setupPageLetter(view);
