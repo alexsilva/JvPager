@@ -1,7 +1,7 @@
 <resources>
 
-    <dimen name="pages">19sp</dimen>
-    <dimen name="before_selection_font">20sp</dimen>
-    <dimen name="after_selection_font">21sp</dimen>
+    <dimen name="pages">20sp</dimen>
+    <dimen name="before_selection_font">21sp</dimen>
+    <dimen name="after_selection_font">22sp</dimen>
 
 </resources>

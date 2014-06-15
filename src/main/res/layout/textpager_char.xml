@@ -8,10 +8,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textpager_text_block"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="8sp"
-        android:layout_marginBottom="8sp">
+        android:background="@drawable/boder"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:layout_margin="2dp">
 
         <TextView
             android:layout_width="wrap_content"
