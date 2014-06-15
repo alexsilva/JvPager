@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="page_before_select">#ffffffff</color>
+    <color name="page_after_select">#ff00ff33</color>
+    <color name="color_green">#ff77ff52</color>
+</resources>
