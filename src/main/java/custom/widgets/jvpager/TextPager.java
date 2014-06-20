@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import custom.widgets.texttoggle.TextToggle;
+
 public class TextPager extends LinearLayout implements
     View.OnClickListener,
     AdapterView.OnItemSelectedListener {
@@ -32,16 +34,16 @@ public class TextPager extends LinearLayout implements
 
     private int mPageNumber = 1;
     private int VIEWS_IDS = 1000;
-
     private List<CharSequence> mText;
     private CharSequence mPage = "";
+    private boolean reset = true;
+    private Context context;
 
     private LinearLayout mPagePrevious, mPageNext, mView;
     private TextView mLastTextViewSelected, mNextPageNum, mPreviousPageNum;
-
+    private TextToggle mTextToggle;
     private Spinner mChoices;
-    private boolean reset = true;
-    private Context context;
+
 
 	public void setOnPageClickListener(OnPageClickListener instance) {
 		mOnPageClickListener = instance;
@@ -84,6 +86,8 @@ public class TextPager extends LinearLayout implements
         }
         mNextPageNum = (TextView) findViewById(R.id.textpager_next_page_num);
         mPreviousPageNum = (TextView) findViewById(R.id.textpager_previous_page_num);
+
+        mTextToggle = (TextToggle) findViewById(R.id.texttoggle);
 	}
 
     private void createPaginatingNewStyle(ViewGroup main, LayoutInflater inflater) {
@@ -162,6 +166,10 @@ public class TextPager extends LinearLayout implements
     public int getTextPosition(String text) {
 		return mText.indexOf(text);
 	}
+
+    public TextToggle getTextToggle() {
+        return mTextToggle;
+    }
 
     /**
 	 * Click simulation
