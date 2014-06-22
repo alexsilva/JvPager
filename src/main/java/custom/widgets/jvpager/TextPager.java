@@ -43,7 +43,7 @@ public class TextPager extends LinearLayout implements
     private LinearLayout mPagePrevious, mPageNext, mView;
     private TextView mLastTextViewSelected, mNextPageNum, mPreviousPageNum;
     private TextToggle mTextToggle;
-    private Spinner mChoices;
+    private Spinner mPageOldChoice;
 
     public void setOnPageClickListener(OnPageClickListener instance) {
         mOnPageClickListener = instance;
@@ -79,10 +79,10 @@ public class TextPager extends LinearLayout implements
 
         LinearLayout centerView = (LinearLayout) findViewById(R.id.textpager_center);
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB_MR2) { // api 14+
-            createPaginatingNewStyle(centerView, inflater);
+        if (false && Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB_MR2) { // api 14+
+            newStylePagination(centerView, inflater);
         } else {
-            createPaginatingOldStyle(centerView, inflater);
+            oldStylePagination(centerView, inflater);
         }
         mNextPageNum = (TextView) findViewById(R.id.textpager_next_page_num);
         mPreviousPageNum = (TextView) findViewById(R.id.textpager_previous_page_num);
@@ -90,7 +90,7 @@ public class TextPager extends LinearLayout implements
         mTextToggle = (TextToggle) findViewById(R.id.texttoggle);
     }
 
-    private void createPaginatingNewStyle(ViewGroup main, LayoutInflater inflater) {
+    private void newStylePagination(ViewGroup main, LayoutInflater inflater) {
         // scroll of letters
         HorizontalScrollView scroll = new HorizontalScrollView(context);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -122,23 +122,22 @@ public class TextPager extends LinearLayout implements
         main.addView(scroll);
     }
 
-    private void createPaginatingOldStyle(ViewGroup main, LayoutInflater inflater) {
+    private void oldStylePagination(ViewGroup main, LayoutInflater inflater) {
         View view = inflater.inflate(R.layout.textpager_choice, main, false);
         LayoutParams params = new LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER;
         view.setLayoutParams(params);
-
-        mChoices = (Spinner) view.findViewById(R.id.textpager_pages_old_style);
+        mPageOldChoice = (Spinner) view.findViewById(R.id.textpager_pages_old_style);
         List<String> strings = new ArrayList<String>();
         for (CharSequence item : mTextPages) {
-            strings.add(String.format("%s -----", item));
+            strings.add(String.format("%s%5s", item, "----"));
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 context, android.R.layout.simple_spinner_item, strings
         );
-        mChoices.setAdapter(adapter);
-        mChoices.setOnItemSelectedListener(this);
+        mPageOldChoice.setAdapter(adapter);
+        mPageOldChoice.setOnItemSelectedListener(this);
         main.addView(view);
     }
 
@@ -178,7 +177,7 @@ public class TextPager extends LinearLayout implements
     public void setSelectedPage(int pageIndex, int pageNumber) {
         if (pageIndex > -1) {
             setPageNumber(pageNumber);
-            if (mChoices == null) {
+            if (mPageOldChoice == null) {
                 onClick(mView.findViewById(mIDs + pageIndex));
             } else {
                 onPageChangeOldStyle(pageIndex);
