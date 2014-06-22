@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="test_letter" translatable="false">M</string>
+    <string name="one" translatable="false">1</string>
+    <string name="two" translatable="false">2</string>
     <string name="page_information">page</string>
     <string name="textpager_pages_title">Pages</string>
     <string name="go_next_page">go next page</string>
