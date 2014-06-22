@@ -24,12 +24,12 @@ import java.util.List;
 import custom.widgets.texttoggle.TextToggle;
 
 public class TextPager extends LinearLayout implements
-    View.OnClickListener,
-    AdapterView.OnItemSelectedListener {
+        View.OnClickListener,
+        AdapterView.OnItemSelectedListener {
 
     public interface OnPageClickListener {
         public void onPageClick(TextPager pager);
-	}
+    }
 
     private OnPageClickListener mOnPageClickListener;
 
@@ -45,26 +45,25 @@ public class TextPager extends LinearLayout implements
     private TextToggle mTextToggle;
     private Spinner mChoices;
 
+    public void setOnPageClickListener(OnPageClickListener instance) {
+        mOnPageClickListener = instance;
+    }
 
-	public void setOnPageClickListener(OnPageClickListener instance) {
-		mOnPageClickListener = instance;
-	}
-
-	public TextPager(Context context) {
-		super(context);
-		initialize(context);
-	}
+    public TextPager(Context context) {
+        super(context);
+        initialize(context);
+    }
 
     public TextPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize(context);
     }
 
-	private void initialize(Context context) {
+    private void initialize(Context context) {
         this.context = context;
 
         LayoutInflater inflater = (LayoutInflater)
-            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.textpager, this, true);
         Resources res = context.getResources();
 
@@ -80,7 +79,7 @@ public class TextPager extends LinearLayout implements
 
         LinearLayout centerView = (LinearLayout) findViewById(R.id.textpager_center);
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB_MR2){ // api 14+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB_MR2) { // api 14+
             createPaginatingNewStyle(centerView, inflater);
         } else {
             createPaginatingOldStyle(centerView, inflater);
@@ -89,7 +88,7 @@ public class TextPager extends LinearLayout implements
         mPreviousPageNum = (TextView) findViewById(R.id.textpager_previous_page_num);
 
         mTextToggle = (TextToggle) findViewById(R.id.texttoggle);
-	}
+    }
 
     private void createPaginatingNewStyle(ViewGroup main, LayoutInflater inflater) {
         // scroll of letters
@@ -126,7 +125,7 @@ public class TextPager extends LinearLayout implements
     private void createPaginatingOldStyle(ViewGroup main, LayoutInflater inflater) {
         View view = inflater.inflate(R.layout.textpager_choice, main, false);
         LayoutParams params = new LayoutParams(
-            LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER;
         view.setLayoutParams(params);
 
@@ -136,7 +135,7 @@ public class TextPager extends LinearLayout implements
             strings.add(String.format("%s -----", item));
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-             context, android.R.layout.simple_spinner_item, strings
+                context, android.R.layout.simple_spinner_item, strings
         );
         mChoices.setAdapter(adapter);
         mChoices.setOnItemSelectedListener(this);
@@ -148,7 +147,7 @@ public class TextPager extends LinearLayout implements
         onPageChangeOldStyle(position);
     }
 
-    private void onPageChangeOldStyle(int position){
+    private void onPageChangeOldStyle(int position) {
         CharSequence page = mPageOptions.get(position);
         if (!page.equals(mTextPage)) {
             mPageNumber = 1;
@@ -173,25 +172,26 @@ public class TextPager extends LinearLayout implements
     }
 
     /**
-	 * Click simulation
-	 * @param pageIndex
-	 */
-	public void setSelectedPage(int pageIndex, int pageNumber) {
-        if (pageIndex > -1){
+     * Click simulation
+     *
+     * @param pageIndex
+     */
+    public void setSelectedPage(int pageIndex, int pageNumber) {
+        if (pageIndex > -1) {
             setPageNumber(pageNumber);
-            if (mChoices == null){
+            if (mChoices == null) {
                 onClick(mView.findViewById(mIDs + pageIndex));
             } else {
                 onPageChangeOldStyle(pageIndex);
             }
         }
-	}
+    }
 
     public String getSelectedPageText() {
         return String.valueOf(mTextPage);
     }
 
-    public int getSelectedPagePosition(){
+    public int getSelectedPagePosition() {
         return getTextPosition(getSelectedPageText());
     }
 
@@ -205,15 +205,15 @@ public class TextPager extends LinearLayout implements
     }
 
     private void updateDisplay() {
-        mPreviousPageNum.setText(String.valueOf(mPageNumber == 1 ? 1: mPageNumber -1));
+        mPreviousPageNum.setText(String.valueOf(mPageNumber == 1 ? 1 : mPageNumber - 1));
         mNextPageNum.setText(String.valueOf(mPageNumber + 1));
     }
 
     private void setupPageIndex(View view) {
         Resources res = getResources();
-        if (view == mPagePrevious){
+        if (view == mPagePrevious) {
             if (mPageNumber > 1) mPageNumber--;
-        } else if (view == mPageNext){
+        } else if (view == mPageNext) {
             mPageNumber++;
         }
         String message = res.getString(R.string.page_information) + " " + String.valueOf(mPageNumber);
@@ -223,16 +223,17 @@ public class TextPager extends LinearLayout implements
 
     private void setupPageLetter(View view) {
         Resources res = getResources();
-        if (mLastTextViewSelected != null){
+        if (mLastTextViewSelected != null) {
             mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     res.getDimension(R.dimen.before_selection_font));
             mLastTextViewSelected.setTextColor(res.getColor(R.color.page_before_select));
-            if (reset) mPageNumber = 1; else reset = true;
+            if (reset) mPageNumber = 1;
+            else reset = true;
         }
         mLastTextViewSelected = (TextView) view.findViewById(R.id.textpager_text);
         mLastTextViewSelected.setTextColor(res.getColor(R.color.page_after_select));
         mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                                          res.getDimension(R.dimen.after_selection_font));
+                res.getDimension(R.dimen.after_selection_font));
         mTextPage = mLastTextViewSelected.getText();
 
         if (mOnPageClickListener != null)
@@ -241,8 +242,8 @@ public class TextPager extends LinearLayout implements
         updateDisplay();
     }
 
-	@Override
-	public void onClick(View view) {
+    @Override
+    public void onClick(View view) {
         int viewId = view.getId();
         if (viewId == R.id.go_previous || viewId == R.id.go_next) {
             setupPageIndex(view);
@@ -250,7 +251,7 @@ public class TextPager extends LinearLayout implements
             setupPageLetter(view);
         }
         updateDisplay();
-	}
+    }
 }
 
 
