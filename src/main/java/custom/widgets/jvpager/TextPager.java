@@ -132,7 +132,7 @@ public class TextPager extends LinearLayout implements
         mChoices = (Spinner) view.findViewById(R.id.textpager_pages_old_style);
         List<String> strings = new ArrayList<String>();
         for (CharSequence item: mText){
-            strings.add(String.format("----%7s", item));
+            strings.add(String.format("%s -----", item));
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
              context, android.R.layout.simple_spinner_item, strings
