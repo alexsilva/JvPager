@@ -78,7 +78,7 @@ public class TextPager extends LinearLayout implements
 
         LinearLayout centerView = (LinearLayout) findViewById(R.id.textpager_center);
 
-        if (false && Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB_MR2) { // api 14+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB_MR2) { // api 14+
             newStylePagination(centerView, inflater);
         } else {
             oldStylePagination(centerView, inflater);
