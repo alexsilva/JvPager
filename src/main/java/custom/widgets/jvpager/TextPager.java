@@ -37,7 +37,7 @@ public class TextPager extends LinearLayout implements
     private int mPageNumber = 1;
     private List<CharSequence> mTextPages;
     private CharSequence mTextPage = "";
-    private boolean reset = true;
+    private boolean resetPageNumber = true;
     private Context context;
 
     private LinearLayout mPagePrevious, mPageNext, mView;
@@ -148,8 +148,10 @@ public class TextPager extends LinearLayout implements
 
     private void onPageChangeOldStyle(int position) {
         CharSequence page = mTextPages.get(position);
-        if (!page.equals(mTextPage))
-            mPageNumber = 1;
+        if (!page.equals(mTextPage)) {
+            if (resetPageNumber) mPageNumber = 1;
+            else resetPageNumber = true;
+        }
         mTextPage = page;
         if (mOnPageClickListener != null) {
             mOnPageClickListener.onPageClick(this);
@@ -196,7 +198,7 @@ public class TextPager extends LinearLayout implements
     }
 
     public void setPageNumber(int number) {
-        reset = false;
+        resetPageNumber = false;
         mPageNumber = number;
     }
 
@@ -223,8 +225,8 @@ public class TextPager extends LinearLayout implements
             mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     res.getDimension(R.dimen.before_selection_font));
             mLastTextViewSelected.setTextColor(res.getColor(R.color.page_before_select));
-            if (reset) mPageNumber = 1;
-            else reset = true;
+            if (resetPageNumber) mPageNumber = 1;
+            else resetPageNumber = true;
         }
         mLastTextViewSelected = (TextView) view.findViewById(R.id.textpager_text);
         mLastTextViewSelected.setTextColor(res.getColor(R.color.page_after_select));
