@@ -39,7 +39,7 @@ public class TextPager extends LinearLayout implements
     private CharSequence mTextPage = "";
     private boolean resetPageNumber = false;
     private LinearLayout mPagePrevious, mPageNext, mView;
-    private TextView mLastTextViewSelected, mNextPageNum, mPreviousPageNum;
+    private TextView mLastSelectedPage, mNextPageNum, mPreviousPageNum;
     private TextToggle mTextToggle;
     private Spinner mPageOldChoice;
     private Context context;
@@ -230,13 +230,15 @@ public class TextPager extends LinearLayout implements
         selectedPage.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 res.getDimension(R.dimen.after_selection_font));
 
-        if (mLastTextViewSelected != null) {
-            mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+        if (mLastSelectedPage != null && selectedPage != mLastSelectedPage) {
+            mLastSelectedPage.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     res.getDimension(R.dimen.before_selection_font));
-            mLastTextViewSelected.setTextColor(res.getColor(R.color.page_before_select));
+            mLastSelectedPage.setTextColor(res.getColor(R.color.page_before_select));
         }
+
         checkResetPageNumber(selectedPage.getText());
-        mLastTextViewSelected = selectedPage;
+
+        mLastSelectedPage = selectedPage;
         mTextPage = selectedPage.getText();
 
         if (mOnPageClickListener != null)
@@ -254,6 +256,7 @@ public class TextPager extends LinearLayout implements
             setupPageLetter(view);
         }
         updatePageNumberDisplay();
+        invalidate(); //update all views
     }
 }
 
