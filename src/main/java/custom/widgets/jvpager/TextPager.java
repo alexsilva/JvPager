@@ -30,12 +30,13 @@ public class TextPager extends LinearLayout implements
     public interface OnPageClickListener {
         public void onPageClick(TextPager pager);
 	}
+
     private OnPageClickListener mOnPageClickListener;
 
+    private int mIDs = 1000;
     private int mPageNumber = 1;
-    private int VIEWS_IDS = 1000;
-    private List<CharSequence> mText;
-    private CharSequence mPage = "";
+    private List<CharSequence> mPageOptions;
+    private CharSequence mTextPage = "";
     private boolean reset = true;
     private Context context;
 
@@ -67,7 +68,7 @@ public class TextPager extends LinearLayout implements
         inflater.inflate(R.layout.textpager, this, true);
         Resources res = context.getResources();
 
-        mText = Arrays.asList(res.getTextArray(R.array.textpager_letters));
+        mPageOptions = Arrays.asList(res.getTextArray(R.array.textpager_letters));
 
         // next button - layout settings
         mPageNext = (LinearLayout) findViewById(R.id.go_next);
@@ -104,13 +105,13 @@ public class TextPager extends LinearLayout implements
         params.gravity = Gravity.CENTER;
         mView.setLayoutParams(params);
 
-        for (int pos = 0; pos < mText.size(); pos++){
+        for (int pos = 0; pos < mPageOptions.size(); pos++) {
             LinearLayout view = (LinearLayout)
                     inflater.inflate(R.layout.option_page, mView, false);
-            view.setId(VIEWS_IDS + pos);
+            view.setId(mIDs + pos);
 
             TextView text = (TextView) view.findViewById(R.id.textpager_text);
-            text.setText(mText.get(pos));
+            text.setText(mPageOptions.get(pos));
 
             params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
@@ -131,7 +132,7 @@ public class TextPager extends LinearLayout implements
 
         mChoices = (Spinner) view.findViewById(R.id.textpager_pages_old_style);
         List<String> strings = new ArrayList<String>();
-        for (CharSequence item: mText){
+        for (CharSequence item : mPageOptions) {
             strings.add(String.format("%s -----", item));
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -148,11 +149,11 @@ public class TextPager extends LinearLayout implements
     }
 
     private void onPageChangeOldStyle(int position){
-        CharSequence page = mText.get(position);
-        if (!page.equals(mPage)) {
+        CharSequence page = mPageOptions.get(position);
+        if (!page.equals(mTextPage)) {
             mPageNumber = 1;
         }
-        mPage = page;
+        mTextPage = page;
         if (mOnPageClickListener != null) {
             mOnPageClickListener.onPageClick(this);
         }
@@ -164,8 +165,8 @@ public class TextPager extends LinearLayout implements
     }
 
     public int getTextPosition(String text) {
-		return mText.indexOf(text);
-	}
+        return mPageOptions.indexOf(text);
+    }
 
     public TextToggle getTextToggle() {
         return mTextToggle;
@@ -179,7 +180,7 @@ public class TextPager extends LinearLayout implements
         if (pageIndex > -1){
             setPageNumber(pageNumber);
             if (mChoices == null){
-                onClick(mView.findViewById(VIEWS_IDS + pageIndex));
+                onClick(mView.findViewById(mIDs + pageIndex));
             } else {
                 onPageChangeOldStyle(pageIndex);
             }
@@ -187,8 +188,8 @@ public class TextPager extends LinearLayout implements
 	}
 
     public String getSelectedPageText() {
-        return String.valueOf(mPage);
-	}
+        return String.valueOf(mTextPage);
+    }
 
     public int getSelectedPagePosition(){
         return getTextPosition(getSelectedPageText());
@@ -232,7 +233,7 @@ public class TextPager extends LinearLayout implements
         mLastTextViewSelected.setTextColor(res.getColor(R.color.page_after_select));
         mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                                           res.getDimension(R.dimen.after_selection_font));
-        mPage = mLastTextViewSelected.getText();
+        mTextPage = mLastTextViewSelected.getText();
 
         if (mOnPageClickListener != null)
             mOnPageClickListener.onPageClick(this);
