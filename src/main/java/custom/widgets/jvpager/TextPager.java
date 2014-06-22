@@ -149,9 +149,8 @@ public class TextPager extends LinearLayout implements
 
     private void onPageChangeOldStyle(int position) {
         CharSequence page = mPageOptions.get(position);
-        if (!page.equals(mTextPage)) {
+        if (!page.equals(mTextPage))
             mPageNumber = 1;
-        }
         mTextPage = page;
         if (mOnPageClickListener != null) {
             mOnPageClickListener.onPageClick(this);
