@@ -234,9 +234,8 @@ public class TextPager extends LinearLayout implements
             mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     res.getDimension(R.dimen.before_selection_font));
             mLastTextViewSelected.setTextColor(res.getColor(R.color.page_before_select));
-            checkResetPageNumber(selectedPage.getText());
         }
-
+        checkResetPageNumber(selectedPage.getText());
         mLastTextViewSelected = selectedPage;
         mTextPage = selectedPage.getText();
 
