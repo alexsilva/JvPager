@@ -104,13 +104,13 @@ public class TextPager extends LinearLayout implements
         params.gravity = Gravity.CENTER;
         mView.setLayoutParams(params);
 
-        for (int pos = 0; pos < mTextPages.size(); pos++) {
+        for (int index = 0; index < mTextPages.size(); index++) {
             LinearLayout view = (LinearLayout)
                     inflater.inflate(R.layout.option_page, mView, false);
-            view.setId(mIDs + pos);
+            view.setId(mIDs + index);
 
             TextView text = (TextView) view.findViewById(R.id.textpager_text);
-            text.setText(mTextPages.get(pos));
+            text.setText(mTextPages.get(index));
 
             params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
