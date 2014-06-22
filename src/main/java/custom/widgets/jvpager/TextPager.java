@@ -146,6 +146,11 @@ public class TextPager extends LinearLayout implements
         onPageChangeOldStyle(position);
     }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        onPageChangeOldStyle(1);
+    }
+
     private void onPageChangeOldStyle(int position) {
         CharSequence textPage = mTextPages.get(position);
         checkResetPageNumber(textPage);
@@ -160,10 +165,6 @@ public class TextPager extends LinearLayout implements
             if (resetPageNumber) mPageNumber = 1;
             else resetPageNumber = true;
         }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     public int getTextPosition(String text) {
