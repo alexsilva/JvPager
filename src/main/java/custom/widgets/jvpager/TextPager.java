@@ -35,7 +35,7 @@ public class TextPager extends LinearLayout implements
 
     private int mIDs = 1000;
     private int mPageNumber = 1;
-    private List<CharSequence> mPageOptions;
+    private List<CharSequence> mTextPages;
     private CharSequence mTextPage = "";
     private boolean reset = true;
     private Context context;
@@ -67,7 +67,7 @@ public class TextPager extends LinearLayout implements
         inflater.inflate(R.layout.textpager, this, true);
         Resources res = context.getResources();
 
-        mPageOptions = Arrays.asList(res.getTextArray(R.array.textpager_letters));
+        mTextPages = Arrays.asList(res.getTextArray(R.array.textpager_letters));
 
         // next button - layout settings
         mPageNext = (LinearLayout) findViewById(R.id.go_next);
@@ -104,13 +104,13 @@ public class TextPager extends LinearLayout implements
         params.gravity = Gravity.CENTER;
         mView.setLayoutParams(params);
 
-        for (int pos = 0; pos < mPageOptions.size(); pos++) {
+        for (int pos = 0; pos < mTextPages.size(); pos++) {
             LinearLayout view = (LinearLayout)
                     inflater.inflate(R.layout.option_page, mView, false);
             view.setId(mIDs + pos);
 
             TextView text = (TextView) view.findViewById(R.id.textpager_text);
-            text.setText(mPageOptions.get(pos));
+            text.setText(mTextPages.get(pos));
 
             params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             params.gravity = Gravity.CENTER;
@@ -131,7 +131,7 @@ public class TextPager extends LinearLayout implements
 
         mChoices = (Spinner) view.findViewById(R.id.textpager_pages_old_style);
         List<String> strings = new ArrayList<String>();
-        for (CharSequence item : mPageOptions) {
+        for (CharSequence item : mTextPages) {
             strings.add(String.format("%s -----", item));
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -148,7 +148,7 @@ public class TextPager extends LinearLayout implements
     }
 
     private void onPageChangeOldStyle(int position) {
-        CharSequence page = mPageOptions.get(position);
+        CharSequence page = mTextPages.get(position);
         if (!page.equals(mTextPage))
             mPageNumber = 1;
         mTextPage = page;
@@ -163,7 +163,7 @@ public class TextPager extends LinearLayout implements
     }
 
     public int getTextPosition(String text) {
-        return mPageOptions.indexOf(text);
+        return mTextPages.indexOf(text);
     }
 
     public TextToggle getTextToggle() {
