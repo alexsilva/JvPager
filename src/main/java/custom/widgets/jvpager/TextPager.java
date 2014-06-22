@@ -225,19 +225,20 @@ public class TextPager extends LinearLayout implements
     private void setupPageLetter(View view) {
         Resources res = getResources();
 
+        TextView selectedPage = (TextView) view.findViewById(R.id.textpager_text);
+        selectedPage.setTextColor(res.getColor(R.color.page_after_select));
+        selectedPage.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                res.getDimension(R.dimen.after_selection_font));
+
         if (mLastTextViewSelected != null) {
             mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     res.getDimension(R.dimen.before_selection_font));
             mLastTextViewSelected.setTextColor(res.getColor(R.color.page_before_select));
-            checkResetPageNumber(mLastTextViewSelected.getText());
+            checkResetPageNumber(selectedPage.getText());
         }
 
-        mLastTextViewSelected = (TextView) view.findViewById(R.id.textpager_text);
-        mLastTextViewSelected.setTextColor(res.getColor(R.color.page_after_select));
-        mLastTextViewSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                res.getDimension(R.dimen.after_selection_font));
-
-        mTextPage = mLastTextViewSelected.getText();
+        mLastTextViewSelected = selectedPage;
+        mTextPage = selectedPage.getText();
 
         if (mOnPageClickListener != null)
             mOnPageClickListener.onPageClick(this);
