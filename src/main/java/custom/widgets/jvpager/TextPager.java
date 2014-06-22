@@ -171,8 +171,6 @@ public class TextPager extends LinearLayout implements
 
     /**
      * Click simulation
-     *
-     * @param pageIndex
      */
     public void setSelectedPage(int pageIndex, int pageNumber) {
         if (pageIndex > -1) {
