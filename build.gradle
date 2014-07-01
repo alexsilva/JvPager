@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId 'custom.widgets.jvpager'
         minSdkVersion 9
-        targetSdkVersion 'android-L'
+        targetSdkVersion 20
         versionCode 1
         versionName '1.0'
     }
