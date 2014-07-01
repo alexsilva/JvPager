@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 'android-L'
-    buildToolsVersion '19.1.0'
+    compileSdkVersion 20
+    buildToolsVersion '19.1'
     defaultConfig {
         applicationId 'custom.widgets.jvpager'
         minSdkVersion 9
-        targetSdkVersion 19
+        targetSdkVersion 'android-L'
         versionCode 1
         versionName '1.0'
     }
