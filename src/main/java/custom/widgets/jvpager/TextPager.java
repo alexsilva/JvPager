@@ -27,27 +27,17 @@ public class TextPager extends LinearLayout implements
         View.OnClickListener,
         AdapterView.OnItemSelectedListener {
 
-    public interface OnPageClickListener {
-        public void onPageClick(TextPager pager);
-    }
-
     private OnPageClickListener mOnPageClickListener;
-
     private int mIDs = 1000;
     private int mPageNumber = 1;
-    private List<CharSequence> mTextPages;
     private CharSequence mTextPage = "";
+    private List<CharSequence> mTextPages;
     private boolean resetPageNumber = false;
     private LinearLayout mPagePrevious, mPageNext, mView;
     private TextView mLastSelectedPage, mNextPageNum, mPreviousPageNum;
     private TextToggle mTextToggle;
     private Spinner mPageOldChoice;
     private Context context;
-
-    public void setOnPageClickListener(OnPageClickListener instance) {
-        mOnPageClickListener = instance;
-    }
-
     public TextPager(Context context) {
         super(context);
         initialize(context);
@@ -56,6 +46,10 @@ public class TextPager extends LinearLayout implements
     public TextPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize(context);
+    }
+
+    public void setOnPageClickListener(OnPageClickListener onPageClickListener) {
+        mOnPageClickListener = onPageClickListener;
     }
 
     private void initialize(Context context) {
@@ -257,6 +251,10 @@ public class TextPager extends LinearLayout implements
         }
         updatePageNumberDisplay();
         invalidate(); //update all views
+    }
+
+    public interface OnPageClickListener {
+        public void onPageClick(TextPager pager);
     }
 }
 
