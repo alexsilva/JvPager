@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/textpager_text_block"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textpager_text_block"
+        android:layout_gravity="center"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/page_states"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="2dp"
-        android:paddingTop="2dp"
-        android:layout_margin="4dp">
+        android:padding="2dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/test_letter"
-            android:id="@+id/textpager_text"
-            android:textSize="@dimen/before_selection_font" />
+            android:minWidth="35dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textpager_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/test_letter"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/before_selection_font" />
+        </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>
