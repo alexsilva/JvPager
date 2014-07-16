@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 20
-    buildToolsVersion '19.1'
+    buildToolsVersion '20'
     defaultConfig {
         applicationId 'custom.widgets.jvpager'
         minSdkVersion 9
