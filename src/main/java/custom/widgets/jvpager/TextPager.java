@@ -2,30 +2,24 @@ package custom.widgets.jvpager;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import custom.widgets.texttoggle.TextToggle;
 
 public class TextPager extends LinearLayout implements
-        View.OnClickListener,
-        AdapterView.OnItemSelectedListener {
+        View.OnClickListener {
 
     private OnPageClickListener mOnPageClickListener;
     private int mIDs = 1000;
@@ -36,7 +30,6 @@ public class TextPager extends LinearLayout implements
     private LinearLayout mPagePrevious, mPageNext, mView;
     private TextView mLastSelectedPage, mNextPageNum, mPreviousPageNum;
     private TextToggle mTextToggle;
-    private Spinner mPageOldChoice;
     private Context context;
     public TextPager(Context context) {
         super(context);
@@ -71,22 +64,18 @@ public class TextPager extends LinearLayout implements
         mPagePrevious.setOnClickListener(this);
 
         LinearLayout centerView = (LinearLayout) findViewById(R.id.textpager_center);
+        createPaginationView(centerView, inflater);
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB_MR2) { // api 14+
-            newStylePagination(centerView, inflater);
-        } else {
-            oldStylePagination(centerView, inflater);
-        }
         mNextPageNum = (TextView) findViewById(R.id.textpager_next_page_num);
         mPreviousPageNum = (TextView) findViewById(R.id.textpager_previous_page_num);
 
         mTextToggle = (TextToggle) findViewById(R.id.texttoggle);
     }
 
-    private void newStylePagination(ViewGroup main, LayoutInflater inflater) {
-        // scroll of letters
-        HorizontalScrollView scroll = new HorizontalScrollView(context);
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+    private void createPaginationView(ViewGroup main, LayoutInflater inflater) {
+        HorizontalScrollView scroll = new HorizontalScrollView(context); // scroll of letters
+        LayoutParams params = new LayoutParams(
+                LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.CENTER;
         scroll.setLayoutParams(params);
 
@@ -115,45 +104,6 @@ public class TextPager extends LinearLayout implements
         main.addView(scroll);
     }
 
-    private void oldStylePagination(ViewGroup main, LayoutInflater inflater) {
-        View view = inflater.inflate(R.layout.textpager_choice, main, false);
-        LayoutParams params = new LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        params.gravity = Gravity.CENTER;
-        view.setLayoutParams(params);
-        mPageOldChoice = (Spinner) view.findViewById(R.id.textpager_pages_old_style);
-        List<String> strings = new ArrayList<String>();
-        for (CharSequence page : mTextPages) {
-            strings.add(String.format(" %s ", page));
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                context, android.R.layout.simple_spinner_item, strings
-        );
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        mPageOldChoice.setAdapter(adapter);
-        mPageOldChoice.setOnItemSelectedListener(this);
-        main.addView(view);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        onPageChangeOldStyle(position);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        onPageChangeOldStyle(1);
-    }
-
-    private void onPageChangeOldStyle(int position) {
-        CharSequence textPage = mTextPages.get(position);
-        checkResetPageNumber(textPage);
-        mTextPage = textPage;
-        if (mOnPageClickListener != null)
-            mOnPageClickListener.onPageClick(this);
-        updateDisplay();
-    }
-
     private void checkResetPageNumber(CharSequence textPage) {
         if (!textPage.equals(mTextPage)) {
             if (resetPageNumber) mPageNumber = 1;
@@ -175,11 +125,7 @@ public class TextPager extends LinearLayout implements
     public void setSelectedPage(int pageIndex, int pageNumber) {
         if (pageIndex > -1) {
             setPageNumber(pageNumber);
-            if (mPageOldChoice == null) {
-                onClick(mView.findViewById(mIDs + pageIndex));
-            } else {
-                mPageOldChoice.setSelection(pageIndex);
-            }
+            onClick(mView.findViewById(mIDs + pageIndex));
         }
     }
 
