@@ -151,7 +151,7 @@ public class TextPager extends LinearLayout implements
         mTextPage = textPage;
         if (mOnPageClickListener != null)
             mOnPageClickListener.onPageClick(this);
-        updatePageNumberDisplay();
+        updateDisplay();
     }
 
     private void checkResetPageNumber(CharSequence textPage) {
@@ -199,7 +199,7 @@ public class TextPager extends LinearLayout implements
         mPageNumber = number;
     }
 
-    private void updatePageNumberDisplay() {
+    public void updateDisplay() {
         mPreviousPageNum.setText(String.valueOf(mPageNumber == 1 ? 1 : mPageNumber - 1));
         mNextPageNum.setText(String.valueOf(mPageNumber + 1));
     }
@@ -238,7 +238,7 @@ public class TextPager extends LinearLayout implements
         if (mOnPageClickListener != null)
             mOnPageClickListener.onPageClick(this);
 
-        updatePageNumberDisplay();
+        updateDisplay();
     }
 
     @Override
@@ -249,7 +249,7 @@ public class TextPager extends LinearLayout implements
         } else {
             setupPageLetter(view);
         }
-        updatePageNumberDisplay();
+        updateDisplay();
         invalidate(); //update all views
     }
 
